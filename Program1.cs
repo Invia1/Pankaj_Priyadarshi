@@ -15,9 +15,9 @@ namespace Max_Char_Count
             {
                 charCount[str[i]]++;
             }
-            int maxCount = 0;
+            int maxCount = -1;
             char character = ' ';
-            for (int i = 0; i < length-1; i++)
+            for (int i = 0; i < length; i++)
             {
                 if (maxCount < charCount[str[i]])
                 {
