@@ -9,7 +9,7 @@ namespace Hospital_Management_System.UI
 {
     public class Program
     {
-        private static hospitalServices hservices = new hospitalServices();
+        private static ihospitalservices hservices = new hospitalServices();
 
         static void Main(string[] args)
         {
