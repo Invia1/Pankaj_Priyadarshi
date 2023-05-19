@@ -184,12 +184,12 @@ namespace Hospital_Management_System.UI
 
         private static void DeletePatient()
         {
-            Console.WriteLine("Enter player ID:");
+            Console.WriteLine("Enter patient ID:");
             int id = Convert.ToInt32(Console.ReadLine());
 
             hservices.Delete(id);
 
-            Console.WriteLine("Player deleted successfully!");
+            Console.WriteLine("patient deleted successfully!");
         }
     }
 }
