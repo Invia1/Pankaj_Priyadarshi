@@ -1,0 +1,161 @@
+
+
+
+using System;  
+using System.Threading;  
+public class ThreadExample  
+{  
+	//The first thread which is created inside a process is called Main thread.
+    //It starts first and ends at last.
+	
+    public static void Main(string[] args)  
+    {  
+        Thread t = Thread.CurrentThread;  
+        t.Name = "MainThread";  
+        Console.WriteLine(t.Name);  
+    }  
+}
+
+
+
+//-------->To call the static and non-static methods, 
+//--------you need to pass method name in the constructor of ThreadStart class.
+using System;  
+using System.Threading;  
+public class MyThread  
+{  
+    public static void Thread1()  
+    {  
+        for (int i = 0; i < 10; i++)  
+        {  
+            Console.WriteLine(i);  
+        }  
+    }  
+}  
+public class ThreadExample  
+{  
+    public static void Main()  
+    {  
+        Thread t1 = new Thread(new ThreadStart(MyThread.Thread1));  
+        Thread t2 = new Thread(new ThreadStart(MyThread.Thread1));  
+        t1.Start();  
+        t2.Start();  
+    }  
+}
+
+
+
+//Threading Example: ============= Sleep() method ==============
+
+//The Sleep() method suspends the current thread for the specified milliseconds.
+//So, other threads get the chance to start execution.
+
+public class sleepThread
+{
+    public void myThread()
+    {
+        for(int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine(i);
+            Thread.Sleep(500);
+        }
+    }
+}
+
+public class threadResult
+{
+    public static void Main(string[] args)
+    {
+        sleepThread thread = new sleepThread();
+        Thread th1 = new Thread(new ThreadStart(thread.myThread));
+        Thread th2 = new Thread(new ThreadStart(thread.myThread));
+        th1.Start(); 
+        th2.Start();
+        Console.ReadLine();
+    }
+}
+
+
+
+//Threading : =================== Abort() method ======================
+//The Abort() method is used to terminate the thread.
+//It raises ThreadAbortException if Abort operation is not done.
+
+public class sleepThread
+{
+    public void myThread()
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine(i);
+            Thread.Sleep(500);
+        }
+    }
+}
+
+public class threadResult
+{
+    public static void Main(string[] args)
+    {
+        sleepThread thread = new sleepThread();
+        Thread th1 = new Thread(new ThreadStart(thread.myThread));
+        Thread th2 = new Thread(new ThreadStart(thread.myThread));
+        Console.WriteLine("The Main is started");
+        th1.Start();
+        th2.Start();
+        try
+        {
+            th1.Abort();
+            th2.Abort();
+        }
+        catch(Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        Console.WriteLine("The Main is Ended");
+        Console.ReadLine();
+    }
+}
+
+
+
+//Threading : ===================== Join() method ==================================
+//It causes all the calling threads to wait until the current thread (joined thread) is terminated or
+//completes its task.
+
+
+public class joinThread
+{
+    public void myThread()
+    {
+        for (int i = 1; i <= 5; i++)
+        {
+            Console.WriteLine(i);
+            Thread.Sleep(500);
+        }
+    }
+}
+
+public class threadResult
+{
+    public static void Main(string[] args)
+    {
+        joinThread thread = new joinThread();
+        Thread th1 = new Thread(new ThreadStart(thread.myThread));
+        Thread th2 = new Thread(new ThreadStart(thread.myThread));
+        Thread th3 = new Thread(new ThreadStart(thread.myThread));
+        Thread th4 = new Thread(new ThreadStart(thread.myThread));
+
+        th1.Start();
+        th1.Join();
+        Console.WriteLine();
+        th2.Start();
+        th2.Join();
+        Console.WriteLine();
+        th3.Start();
+        th4.Start();
+        
+        Console.ReadLine();
+    }
+}
+
